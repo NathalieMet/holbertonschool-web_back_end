@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""def concat"""
+"""def floor"""
 
 
 def floor(n: float) -> int:
