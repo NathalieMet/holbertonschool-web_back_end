@@ -9,7 +9,5 @@ def update_topics(mongo_collection, name, topics):
     school document based on the name:"""
     result = mongo_collection.update_many(
         {"name": name},
-        {"$set": {"topics": topics}}
-    )
-
+        {"$set": {"topics": topics}})
     return result
