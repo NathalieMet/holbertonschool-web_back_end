@@ -19,6 +19,13 @@ class Server:
     def __init__(self):
         self.__dataset = None
 
+    def index_range(self, page, page_size):
+        """Write a function named index_range that takes two integer arguments
+        page and page_size"""
+        start_index = (page - 1) * page_size
+        end_index = page * page_size
+        return start_index, end_index
+
     def dataset(self) -> List[List]:
         """Cached dataset
         """
@@ -31,14 +38,14 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
+        """get_page"""
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
 
-def index_range(page, page_size):
-    """Write a function named index_range that takes two integer arguments
-    page and page_size"""
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
+        dataset = self.dataset()
+        start_index, end_index = self.index_range(page, page_size)
 
-def get_page(page = 1, page_size = 10):
+        if start_index >= len(dataset):
+            return []
 
+        return dataset[start_index:end_index]
