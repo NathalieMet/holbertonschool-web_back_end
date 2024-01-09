@@ -41,7 +41,7 @@ def display_stats():
     method_stats = get_method_stats()
     print("Methods:")
     for method, count in method_stats.items():
-        print(f"\t method {method}: {count}")
+        print(f"\tmethod {method}: {count}")
 
     """Display count of logs with method=GET and path=/status"""
     status_logs_count = get_status_endpoint_count()
