@@ -12,7 +12,7 @@ total_pages: the total number of pages in the dataset as an integer
 
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 
 class Server:
@@ -54,7 +54,7 @@ class Server:
 
         return dataset[start_index:end_index]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """implement get_hyper method"""
         dataset_page = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
