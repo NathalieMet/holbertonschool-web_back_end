@@ -1,8 +1,8 @@
-import ClassRoom from './0-classroom.js';
+import ClassRoom from './0-classroom';
 
-export default function initializeRooms(Classroom) {
-	const classroom_objects = [new ClassRoom(19),
-		new ClassRoom(20),
-		new ClassRoom(34),]
-	return classroom_objects
-  }
+export default function initializeRooms() {
+  const classroomObjects = [new ClassRoom(19),
+    new ClassRoom(20),
+    new ClassRoom(34)];
+  return classroomObjects;
+}
