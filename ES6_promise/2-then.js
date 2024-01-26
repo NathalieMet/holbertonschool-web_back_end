@@ -9,13 +9,3 @@ export default function handleResponseFromAPI(promise) {
       console.log('Got a response from the API');
     });
 }
-
-// return promise
-// .then((resolve) => {
-// ({ status: 200, body: 'Success' });
-// })
-// .catch(() => {
-//  console.error({});
-// });
-// console.log('Got a response from the API');
-// }
