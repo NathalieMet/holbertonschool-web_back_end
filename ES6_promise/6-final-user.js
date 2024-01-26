@@ -5,10 +5,10 @@ const handleProfileSignup = async (firstName, lastName, fileName) => {
   const resultArray = [];
   try {
     const user = await signUpUser(firstName, lastName);
-    result.push({ status: 'fulfilled', value: user });
+    resultArray.push({ status: 'fulfilled', value: user });
     await uploadPhoto(fileName);
   } catch (error) {
-    result.push({
+    resultArray.push({
       status: 'rejected',
       value: error.toString(),
     });
