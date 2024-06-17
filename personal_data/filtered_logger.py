@@ -7,6 +7,7 @@ import re
 from typing import List
 import logging
 
+PII_FIELDS = ("name", "email", "password", "phone", "ssn")
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
@@ -59,3 +60,29 @@ substitution with a single regex.
     pattern = f"({'|'.join(fields)})=[^{separator}]*"
     return re.sub(pattern, lambda m: f"{m.group().split('=')[0]}={redaction}",
                   message)
+
+def get_logger() -> logging.Logger:
+    """Creates and returns a logger object configured with RedactingFormatter.
+
+    Returns:
+        logging.Logger: The configured logger object.
+    """
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    # Create console handler and set level to info
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+
+    # Create and add formatter to the handler
+    formatter = RedactingFormatter(list(PII_FIELDS))
+    ch.setFormatter(formatter)
+
+    # Add handler to the logger
+    logger.addHandler(ch)
+
+    return logger
+
+if __name__ == "__main__":
+    logger = get_logger()
