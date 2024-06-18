@@ -6,6 +6,9 @@ function called filter_datum that returns the log message obfuscated
 import re
 from typing import List
 import logging
+import os
+import mysql.connector
+from mysql.connector import connection
 
 PII_FIELDS = ("name", "email", "password", "phone", "ssn")
 
@@ -85,6 +88,30 @@ def get_logger() -> logging.Logger:
     logger.addHandler(ch)
 
     return logger
+
+
+def get_db() -> connection.MySQLConnection:
+    """
+    Connect to a secure MySQL database using credentials from environment variables.
+
+    Returns:
+        MySQLConnection: A connection object to the MySQL database.
+    """
+    # Récupérer les informations d'identification de la base de données à partir des variables d'environnement
+    db_username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    db_host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    db_name = os.getenv('PERSONAL_DATA_DB_NAME')
+
+    # Établir une connexion à la base de données
+    conn = mysql.connector.connect(
+        user=db_username,
+        password=db_password,
+        host=db_host,
+        database=db_name
+    )
+
+    return conn
 
 
 if __name__ == "__main__":
