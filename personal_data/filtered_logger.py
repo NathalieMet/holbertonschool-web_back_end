@@ -12,6 +12,8 @@ from mysql.connector import connection
 
 PII_FIELDS = ("name", "email", "password", "phone", "ssn")
 
+LOG_FILE = 'filtered_user_data.log'
+
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
@@ -115,6 +117,34 @@ def get_db() -> connection.MySQLConnection:
 
     return conn
 
+def main():
+    # Set up logging
+    logging.basicConfig(filename=LOG_FILE, level=logging.INFO)
+    logger = get_logger()
+
+    # Get database connection
+    try:
+        db = get_db()
+        cursor = db.cursor()
+
+        # Retrieve all rows from users table
+        cursor.execute("SELECT * FROM users;")
+        rows = cursor.fetchall()
+
+        # Log each row in the filtered format
+        for row in rows:
+            log_message = "; ".join(f"{key}={value}" for key, value in zip(cursor.column_names, row))
+            logger.info(log_message)
+
+        cursor.close()
+        db.close()
+
+    except mysql.connector.Error as err:
+        logger.error(f"Error connecting to MySQL: {err}")
+
+    # Display filtered fields
+    logger.info("Filtered fields:\n" + "\n".join(PII_FIELDS))
+
 
 if __name__ == "__main__":
-    logger = get_logger()
+    main()
