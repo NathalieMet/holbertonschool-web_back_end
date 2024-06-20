@@ -6,6 +6,7 @@ Class to manage the API authentication
 import base64
 
 from .auth import Auth
+from typing import Tuple
 
 
 class BasicAuth(Auth):
@@ -46,3 +47,20 @@ class BasicAuth(Auth):
             return decoded_value
         except Exception:
             return None
+
+    def extract_user_credentials(
+        self, decoded_base64_authorization_header: str) -> Tuple[str, str]:
+        """ returns the user email and password from the Base64 decoded value.
+        """
+        if decoded_base64_authorization_header is None:
+            return None, None
+        if not isinstance(decoded_base64_authorization_header, str):
+            return None, None
+        if not ":" in decoded_base64_authorization_header:
+            return None, None
+
+        separator = decoded_base64_authorization_header.find(":")
+        email = decoded_base64_authorization_header[:separator]
+        password = decoded_base64_authorization_header[separator +1:]
+
+        return email, password
