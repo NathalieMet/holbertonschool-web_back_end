@@ -51,12 +51,13 @@ class DB:
 
             if user is None:
                 raise NoResultFound()
+                raise InvalidRequestError()
 
             return user
 
         except InvalidRequestError as e:
             self._session.rollback()
-            raise e
+            raise InvalidRequestError()
 
         except SQLAlchemyError as e:
             self._session.rollback()
