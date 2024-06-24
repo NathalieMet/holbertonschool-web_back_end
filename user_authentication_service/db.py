@@ -9,7 +9,6 @@ from user import Base, User
 from sqlalchemy.exc import SQLAlchemyError
 
 
-
 class DB:
     """DB class
     """
