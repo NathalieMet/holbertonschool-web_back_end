@@ -5,7 +5,7 @@ Auth file
 import bcrypt
 
 
-def _hash_password(password: str):
+def _hash_password(password: str) -> bytes:
     """
     Hashes a password using bcrypt with a salt.
 
