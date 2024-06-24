@@ -51,7 +51,6 @@ class DB:
 
             if user is None:
                 raise NoResultFound()
-                raise InvalidRequestError()
 
             return user
 
