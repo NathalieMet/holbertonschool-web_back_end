@@ -55,5 +55,7 @@ class DB:
             return user
 
         except InvalidRequestError as e:
-            self._session.rollback()
+            raise e
+
+        except SQLAlchemyError as e:
             raise e
