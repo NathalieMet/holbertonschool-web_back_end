@@ -47,11 +47,11 @@ class DB:
         """
 
         try:
-            user = self._session.query(User).filter_by(**kwargs).first()
+            user = self._session.query(User).filter_by(**kwargs).one()
             return user
 
-        except NoResultFound as e:
-            raise e
+        except NoResultFound:
+            raise NoResultFound
 
-        except InvalidRequestError as e:
-            raise e
+        except InvalidRequestError:
+            raise InvalidRequestError
