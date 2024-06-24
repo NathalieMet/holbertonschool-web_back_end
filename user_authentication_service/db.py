@@ -36,9 +36,6 @@ class DB:
         """
         new_user = User(email=email, hashed_password=hashed_password, **kwargs)
         self._session.add(new_user)
-        try:
-            self._session.commit()
-        except SQLAlchemyError:
-            self._session.rollback()
-            raise
+        self._session.commit()
+
         return new_user
