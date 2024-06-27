@@ -110,10 +110,10 @@ class Auth:
         update the user’s reset_token database field. Return the token.
         """
         try:
-            user = DB.find_user_by(email=email)
-            new_token = _generate_uuid()
-            DB.update_user(user.id, reset_token=new_token)
-            return new_token
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            raise ValueError("User not found")
 
-        except ValueError:
-            raise ValueError
+        new_token = _generate_uuid()
+        self._db.update_user(user.id, reset_token=new_token)
+        return new_token
