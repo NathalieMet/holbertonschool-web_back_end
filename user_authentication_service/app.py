@@ -3,7 +3,7 @@
 Route module for the API
 """
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort, make_response
 from auth import Auth
 from db import DB
 from auth import Auth
@@ -44,6 +44,33 @@ def register_user() -> str:
         return jsonify({"email": user.email, "message": "user created"})
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
+
+
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
+def login_user() -> str:
+    """ POST /sessions/
+    Form data:
+      - email
+      - password
+    Return:
+      - JSON payload of the form:
+        {"email": "<user email>", "message": "logged in"}
+      - 401 if login information is incorrect
+    """
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    if not email or not password:
+        abort(401)
+
+    if not AUTH.valid_login(email, password):
+        abort(401)
+
+    session_id = AUTH.create_session(email)
+    response = make_response(jsonify({"email": email, "message": "logged in"}))
+    response.set_cookie("session_id", session_id)
+
+    return response
 
 
 if __name__ == "__main__":
