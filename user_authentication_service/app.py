@@ -94,6 +94,7 @@ def logout_user() -> str:
     response.delete_cookie('session_id')
     return response
 
+
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def get_profile() -> str:
     """ GET /profile/
