@@ -94,6 +94,26 @@ def logout_user() -> str:
     response.delete_cookie('session_id')
     return response
 
+@app.route('/profile', methods=['GET'], strict_slashes=False)
+def get_profile() -> str:
+    """ GET /profile/
+    The request is expected to contain a session_id cookie. Use it to find the
+    user. If the user exist, respond with a 200 HTTP status and the following
+    JSON payload:
+    {"email": "<user email>"}
+    """
+    session_id = request.cookies.get('session_id')
+
+    if session_id is None:
+        abort(403)
+
+    user = AUTH.get_user_from_session_id(session_id)
+
+    if user is None:
+        abort(403)
+
+    return jsonify({"email": user.email})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
