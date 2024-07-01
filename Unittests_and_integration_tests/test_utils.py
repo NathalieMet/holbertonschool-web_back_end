@@ -39,12 +39,12 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), 'a'),
         ({"a": 1}, ("a", "b"), 'b'),
     ])
-
     def test_access_nested_map_exception(self, nested_map, path, key):
         """Test that a KeyError is raised for the following inputs"""
         with self.assertRaises(KeyError) as cm:
-             access_nested_map(nested_map, path)
+            access_nested_map(nested_map, path)
         self.assertEqual(str(cm.exception), f"'{key}'")
+
 
 class TestGetJson(unittest.TestCase):
     """Test the utils.get_json function from utils"""
@@ -67,6 +67,7 @@ class TestGetJson(unittest.TestCase):
         self.assertEqual(result, test_payload)
         mock_get.assert_called_once_with(test_url)
 
+
 class TestMemoize(unittest.TestCase):
     """Test the memoize function from utils"""
 
@@ -85,7 +86,7 @@ class TestMemoize(unittest.TestCase):
                 """Function a_property"""
                 return self.a_method()
 
-         # Créer une instance de TestClass
+        # Créer une instance de TestClass
         test_instance = TestClass()
 
         # Patch a_method pour vérifier combien de fois il est appelé
@@ -101,6 +102,7 @@ class TestMemoize(unittest.TestCase):
 
             # Vérifier que a_method n'a été appelé qu'une seule fois
             mock_a_method.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
