@@ -40,7 +40,8 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(org_data, {"some_key": "some_value"})
 
     def test_public_repos_url(self):
-        """Test the _public_repos_url property"""
+        """Test the _public_repos_url property
+        """
 
         # Payload to be returned by the mocked `org` method
         mock_payload = {"repos_url":
@@ -64,7 +65,8 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
-        """Test GithubOrgClient.public_repos"""
+        """Test GithubOrgClient.public_repos
+        """
 
         # Payload fictif pour les repos
         mock_repo_payload = [
