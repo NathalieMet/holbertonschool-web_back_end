@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Class to test GithubOrgClient methods
+"""
+Class to test GithubOrgClient methods
 """
 
 import unittest
@@ -9,15 +10,18 @@ from unittest.mock import patch, Mock
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """Class to test GithubOrgClient methods
     """
+    Class to test GithubOrgClient methods
+    """
+
     @patch('client.get_json')
     @parameterized.expand([
         ("google", "https://api.github.com/orgs/google"),
         ("abc", "https://api.github.com/orgs/abc"),
     ])
     def test_org(self, org_name, expected_url, mock_get_json):
-        """This method tests that GithubOrgClient.org returns the correct
+        """
+        This method tests that GithubOrgClient.org returns the correct
         value"""
 
         # Mock the return value of get_json
