@@ -77,7 +77,9 @@ class TestGithubOrgClient(unittest.TestCase):
         mock_get_json.return_value = mock_repo_payload
 
         # Mock _public_repos_url pour retourner une URL fictive
-        mock_public_repos_url.return_value = "https://api.github.com/orgs/google/repos"
+        mock_public_repos_url.return_value = (
+            "https://api.github.com/orgs/google/repos"
+        )
 
         # Créer une instance de GithubOrgClient
         client = GithubOrgClient("google")
@@ -93,7 +95,9 @@ class TestGithubOrgClient(unittest.TestCase):
         mock_public_repos_url.assert_called_once()
 
         # Vérifier que get_json a été appelé une fois avec l'URL attendue
-        mock_get_json.assert_called_once_with("https://api.github.com/orgs/google/repos")
+        mock_get_json.assert_called_once_with(
+            "https://api.github.com/orgs/google/repos"
+            )
 
 
 if __name__ == "__main__":
