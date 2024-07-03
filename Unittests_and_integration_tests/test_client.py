@@ -9,7 +9,8 @@ from unittest.mock import patch, Mock
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """Class to test GithubOrgClient methods"""
+    """Class to test GithubOrgClient methods
+    """
 
     @patch('client.get_json')
     @parameterized.expand([
