@@ -51,7 +51,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
         # Use patch as a context manager to mock `GithubOrgClient.org`
         with patch.object(GithubOrgClient, 'org',
-                          new_callable=property) as mock_org:
+                          new_callable=PropertyMock) as mock_org:
             # Set the return value of the mocked property
             mock_org.return_value = mock_payload
 
@@ -113,6 +113,7 @@ class TestGithubOrgClient(unittest.TestCase):
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
+
 org_payload = {
     "login": "google",
     "id": 1342004,
@@ -140,6 +141,7 @@ repos_payload = [
 
 expected_repos = ["repo1", "repo2"]
 apache2_repos = ["repo1"]
+
 
 @parameterized_class([
     {
