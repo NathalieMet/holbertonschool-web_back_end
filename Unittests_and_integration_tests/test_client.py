@@ -16,11 +16,11 @@ class TestGithubOrgClient(unittest.TestCase):
     Class to test GithubOrgClient methods
     """
 
-    @patch('client.get_json')
     @parameterized.expand([
         "google",
         "abc"
     ])
+    @patch('client.get_json')
     def test_org(self, org_name: str, mock_get_json: MagicMock):
         """
         This method tests that GithubOrgClient.org returns the correct
