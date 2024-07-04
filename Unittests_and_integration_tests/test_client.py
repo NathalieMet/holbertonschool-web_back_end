@@ -6,7 +6,7 @@ Class to test GithubOrgClient methods
 import unittest
 from parameterized import parameterized
 from client import GithubOrgClient
-from unittest.mock import patch, PropertyMock, Mock
+from unittest.mock import patch, PropertyMock, Mock, MagicMock
 from fixtures import org_payload, repos_payload, expected_repos, apache2_repos
 from parameterized import parameterized_class
 
@@ -21,7 +21,7 @@ class TestGithubOrgClient(unittest.TestCase):
         "google",
         "abc"
     ])
-    def test_org(self, org_name, mock_get_json):
+    def test_org(self, org_name: str, mock_get_json: MagicMock):
         """
         This method tests that GithubOrgClient.org returns the correct
         value"""
