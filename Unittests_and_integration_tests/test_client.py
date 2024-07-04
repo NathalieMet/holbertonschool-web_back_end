@@ -18,10 +18,10 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     @parameterized.expand([
-        ("google", "https://api.github.com/orgs/google"),
-        ("abc", "https://api.github.com/orgs/abc"),
+        "google",
+        "abc"
     ])
-    def test_org(self, org_name, expected_url, mock_get_json):
+    def test_org(self, org_name, mock_get_json):
         """
         This method tests that GithubOrgClient.org returns the correct
         value"""
@@ -36,7 +36,8 @@ class TestGithubOrgClient(unittest.TestCase):
         org_data = client.org
 
         # Assert that get_json was called once with the expected URL
-        mock_get_json.assert_called_once_with(expected_url)
+        mock_get_json.assert_called_once_with(client.ORG_URL.format
+                                              (org=client._org_name))
 
         # Assert that the return value is the mocked return value
         self.assertEqual(org_data, {"some_key": "some_value"})
