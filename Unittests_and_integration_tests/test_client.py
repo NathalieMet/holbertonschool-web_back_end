@@ -7,7 +7,6 @@ import unittest
 from parameterized import parameterized
 from client import GithubOrgClient
 from unittest.mock import patch, PropertyMock, Mock, MagicMock
-from fixtures import org_payload, repos_payload, expected_repos, apache2_repos
 from parameterized import parameterized_class
 
 
@@ -114,6 +113,33 @@ class TestGithubOrgClient(unittest.TestCase):
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
+org_payload = {
+    "login": "google",
+    "id": 1342004,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjEzNDIwMDQ=",
+    "url": "https://api.github.com/orgs/google",
+    "repos_url": "https://api.github.com/orgs/google/repos",
+    # Add other necessary fields
+}
+
+repos_payload = [
+    {
+        "id": 1,
+        "name": "repo1",
+        "full_name": "google/repo1",
+        "license": {"key": "apache-2.0"}
+    },
+    {
+        "id": 2,
+        "name": "repo2",
+        "full_name": "google/repo2",
+        "license": {"key": "mit"}
+    }
+    # Add other necessary fields
+]
+
+expected_repos = ["repo1", "repo2"]
+apache2_repos = ["repo1"]
 
 @parameterized_class([
     {
