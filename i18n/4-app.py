@@ -8,7 +8,7 @@ from flask_babel import Babel, _
 from flask import request
 
 
-def get_locale():
+def get_locale() -> str:
     """
     Determine the best match with our supported languages.
     """
@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
-def output_index():
+def output_index() -> str:
     """
     route that simply outputs “Welcome to Holberton” as page title (<title>)
     and “Hello world” as header (<h1>).
