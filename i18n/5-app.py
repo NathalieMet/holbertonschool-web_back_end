@@ -48,6 +48,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 def get_user():
     """
     Return user dictionary if ID found or None if not found.
@@ -58,12 +59,14 @@ def get_user():
     except (TypeError, ValueError):
         return None
 
+
 @app.before_request
 def before_request():
     """
     Executed before all other functions.
     """
     g.user = get_user()
+
 
 if __name__ == "__main__":
     app.run()
