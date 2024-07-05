@@ -8,6 +8,13 @@ from flask_babel import Babel
 from flask import request
 
 
+def get_locale():
+    """
+    Determine the best match with our supported languages.
+    """
+    return request.accept_languages.best_match(['LANGUAGES'])
+
+
 app = Flask(__name__)
 
 
