@@ -21,7 +21,7 @@ def get_locale() -> str:
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
+@app.route('/', methods=['GET'])
 def output_index() -> str:
     """
     route that simply outputs “Welcome to Holberton” as page title (<title>)
@@ -42,4 +42,5 @@ class Config:
 app.config.from_object(Config)
 babel = Babel(app, locale_selector=get_locale)
 
-app.run()
+if __name__ == "__main__":
+    app.run()
