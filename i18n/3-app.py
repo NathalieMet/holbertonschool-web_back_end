@@ -4,7 +4,7 @@ Route module for the API
 """
 
 from flask import Flask, render_template
-from flask_babel import Babel
+from flask_babel import Babel, _
 from flask import request
 
 
@@ -24,7 +24,7 @@ def output_index():
     route that simply outputs “Welcome to Holberton” as page title (<title>)
     and “Hello world” as header (<h1>).
     """
-    return render_template('0-index.html')
+    return render_template('3-index.html')
 
 
 class Config:
