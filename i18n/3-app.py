@@ -39,4 +39,5 @@ class Config:
 app.config.from_object(Config)
 babel = Babel(app, locale_selector=get_locale)
 
-app.run()
+if __name__ == "__main__":
+    app.run()
