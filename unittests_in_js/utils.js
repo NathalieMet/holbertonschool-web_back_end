@@ -1,7 +1,7 @@
 const Utils = {
 	calculateNumber: function (type, a, b) {
-		number_1 = Math.round(a)
-		number_2 = Math.round(b)
+		const number_1 = Math.round(a)
+		const number_2 = Math.round(b)
 		if (type == "SUM") {
 			return ((number_1 + number_2));
 		}
