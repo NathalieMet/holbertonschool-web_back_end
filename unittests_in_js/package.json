@@ -5,11 +5,10 @@
     "test": "mocha"
   },
   "devDependencies": {
+    "chai": "^4.3.10",
     "mocha": "^9.2.2"
   },
   "dependencies": {
     "express": "^4.17.1"
   }
 }
-
-
