@@ -16,7 +16,7 @@ describe('calculate', function () {
 	});
 
 	it('should round a and b and return the sum of it', function () {
-		assert.equal(calculateNumber(2.5, 4.5), 7);
+		assert.equal(calculateNumber(2.5, 4.5), 8);
 	});
 
 	it('should round a and b and return the sum of it', function () {
