@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./api'); // Assurez-vous que ceci pointe vers votre fichier api.js
+const app = require('./api');
 const { expect } = require('chai');
 
 describe('Index Page', () => {
