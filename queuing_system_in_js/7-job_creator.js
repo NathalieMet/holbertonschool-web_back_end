@@ -63,10 +63,10 @@ job.on('complete', function() {
 	console.log(`Notification job ${job.id} completed`);
   });
 
-job.on('failed', function() {
-	console.log(`Notification job ${job.id} failed: ${err.message}`);
+job.on('failed', function(errorMessage) {
+	console.log(`Notification job ${job.id} failed: ${errorMessage}`);
   });
-job.progress(0, 100, function(progress) {
-    console.log(`Notification job ${newJob.id} ${progress}% complete`);
+job.on('progress', function(progress) {
+    console.log(`Notification job ${job.id} ${progress}% complete`);
   });
 }
