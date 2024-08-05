@@ -4,6 +4,7 @@ Exercise file
 """
 import redis
 import uuid
+from typing import Union
 
 
 class Cache():
@@ -16,7 +17,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: str | bytes | int | float) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """ Generate a random key (e.g. using uuid), store the input data in
         Redis sing the random key and return the key """
         key = str(uuid.uuid4())
