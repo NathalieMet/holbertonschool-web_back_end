@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """ Main file """
 
-Cache = __import__('exercise').Cache
+from exercise import Cache, replay
 
 cache = Cache()
 
 s1 = cache.store("first")
 print(s1)
-s2 = cache.store("secont")
+s2 = cache.store("second")
 print(s2)
 s3 = cache.store("third")
 print(s3)
@@ -17,3 +17,8 @@ outputs = cache._redis.lrange("{}:outputs".format(cache.store.__qualname__), 0, 
 
 print("inputs: {}".format(inputs))
 print("outputs: {}".format(outputs))
+
+cache.store("foo")
+cache.store("bar")
+cache.store(42)
+replay(cache.store)

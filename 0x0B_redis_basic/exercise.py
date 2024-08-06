@@ -23,7 +23,7 @@ def call_history(method: Callable) -> Callable:
 
         output = method(self, *args, *kwargs)
 
-        self._redis.rpush(output_key, output)
+        self._redis.rpush(output_key, str(output))
 
         return output
     return wrapper
@@ -38,6 +38,27 @@ def count_calls(method: Callable) -> Callable:
         self._redis.incr(method.__qualname__)
         return method(self, *args, **kwargs)
     return wrapper
+
+
+def replay(method: Callable):
+    """Display the history of calls of a particular function"""
+    self = method.__self__
+    input_key = f"{method.__qualname__}:inputs"
+    output_key = f"{method.__qualname__}:outputs"
+
+    # Récupérer les historiques des entrées et sorties
+    inputs = self._redis.lrange(input_key, 0, -1)
+    outputs = self._redis.lrange(output_key, 0, -1)
+
+    # Afficher le nombre d'appels
+    call_count = self._redis.get(method.__qualname__).decode('utf-8')
+    print(f"{method.__qualname__} was called {call_count} times:")
+
+    # Afficher les entrées et sorties
+    for input, output in zip(inputs, outputs):
+        input = input.decode('utf-8')
+        output = output.decode('utf-8')
+        print(f"{method.__qualname__}(*{input}) -> {output}")
 
 
 class Cache():
